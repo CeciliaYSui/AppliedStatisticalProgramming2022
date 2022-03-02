@@ -45,7 +45,7 @@ For this problem set, you will not solve the Monty Hall Problem, but you will ha
   \end{itemize}
 \end{enumerate}
 
-```{r tidy=TRUE}
+```{r}
 # Create Constructor
 new_door <- function(door_num){
   # check user input
@@ -55,24 +55,67 @@ new_door <- function(door_num){
                     Converted input to integer: %s", door_num))
   }
   
+  # create object 
+  output <- list(chosen = door_num,
+                 winning = FALSE)
+  
   # change class to door 
-  class(door_num) <- "door"
+  class(output) <- "door"
   # return object 
-  return(door_num)
+  return(output)
 }
 
-new_door(10.5)
 
 # Validator 
 validate_door <- function(x){
-  # if stop
+  # constructor already takes care of integer type,
+  # so we do not need to check for the data type 
+  
+  # Check for integer value
+  if (!(x$chosen %in% c(1L, 2L, 3L))){
+    stop("Door number must be either 1, 2, or 3.")
+  }
+  
   return(x)
 }
 
+
+# Create method PlayGame
+PlayGame.door <- function(x) {
+  # validate parameter object 
+  validate_door(x)
+  
+  # choose door number with the car
+  car <- sample(c(1L, 2L, 3L), 1)
+  print(paste("The winning car is behind door:", car))
+  
+  # update object 
+  if (car == x$chosen) {
+    x$winning <- TRUE
+  }
+  
+  # print appropriate messages 
+  print(ifelse(x$winning, 
+               "Congratulations! You have won the car!",
+               "Sorry! You chose the wrong door. Maybe try again? "))
+  
+}
+
+
+
 # Testing 
+# set seed
+set.seed(123)
 
+# Create an object 
+mydoor <- new_door(3.5)
+mydoor$chosen
+mydoor$winning
 
+# validate the object
+validate_door(mydoor) 
 
-
+# play a game
+PlayGame.door(mydoor)
 
 ```
