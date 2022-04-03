@@ -23,8 +23,13 @@ document(current.code) # Make the help files
 # ------------------------------------------------------
 # Test functions 
 # ------------------------------------------------------
-integrateIt(1:10, function(x){x+1}, c(2,5), rule = "Simpson")
-integrateIt(seq(1, 10, 0.1), function(x){x+1}, c(2,5), rule = "Simpson") # more accurate with smaller intervals 
+test1 <- integrateIt(1:10, function(x){x+1}, c(2,5), rule = "Simpson")
+print(test1)
 
-# check(current.code) # Run the R checks 
-# install(pkg=current.code, local=TRUE) # Install the package
+# test Trapezoid
+integrateIt(1:10, function(x){x+1}, c(2,5), rule = "Trapezoid")
+# more accurate with smaller intervals 
+integrateIt(seq(1, 10, 0.1), function(x){x+1}, c(2,5), rule = "Simpson")
+
+
+# check(current.code) # Run the R checks and will have lots of warnings here. lol 

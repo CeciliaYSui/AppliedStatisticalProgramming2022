@@ -9,9 +9,9 @@
 integrateIt(x_in, f_x, range, rule)
 }
 \arguments{
-\item{x_in}{A vector of values}
+\item{x_in}{A vector of input values}
 
-\item{f_x}{A function to generate evaluated values y}
+\item{f_x}{A function to generate evaluated values y based on input x_in}
 
 \item{range}{Starting and ending values}
 
@@ -33,6 +33,8 @@ This produces an object of a class Trapezoid or Simpson
 
 integrateIt(1:10, function(x){x+1}, c(2,5), rule = "Trapezoid")
 integrateIt(1:10, function(x){x+1}, c(2,5), rule = "Simpson")
+integrateIt(seq(1, 10, 0.1), function(x){x+1}, c(2,5), rule = "Simpson")
+
 
 }
 \seealso{

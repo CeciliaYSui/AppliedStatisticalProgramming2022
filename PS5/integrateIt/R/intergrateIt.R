@@ -3,9 +3,9 @@
 #' Integrates function via Trapezoidal and Simpson's Rule
 #'
 #'
-#' @param x_in A vector of values
-#' @param f_x A function to generate evaluated values y
-#' @param range Starting and ending values 
+#' @param x_in A vector of input values 
+#' @param f_x A function to generate evaluated values y based on input x_in
+#' @param range Starting and ending values
 #' @param rule Method of integration: Trapezoid or Simpson
 #'
 #'
@@ -20,6 +20,8 @@
 #' 
 #' integrateIt(1:10, function(x){x+1}, c(2,5), rule = "Trapezoid")
 #' integrateIt(1:10, function(x){x+1}, c(2,5), rule = "Simpson")
+#' integrateIt(seq(1, 10, 0.1), function(x){x+1}, c(2,5), rule = "Simpson")
+#' 
 #' 
 #' @seealso \code{\link{Trapezoid}}, \code{\link{Simpson}}
 #' @rdname integrateIt
@@ -32,42 +34,42 @@ setGeneric(name = "integrateIt",
 )
 
 
-
+# ------------------------------------------------------
+# Method: integrateIt
+# ------------------------------------------------------
 #' @export
 setMethod(f = "integrateIt",
           definition = function(x_in, f_x, range, rule){
+            
+            # check for valid rule input 
             if (! rule %in% c("Simpson", "Trapezoid")){
               error("Invalid Rule. Please use Simpson or Trapezoid.")
             }
             
             # extract values needed for integration
-            a <- range[1]
-            b <- range[2]
-            f_a <- unlist(lapply(a, f_x))
-            f_b <- unlist(lapply(b, f_x))
-            x_vals <- x_in[x_in > a & x_in < b]
+            x_vals <- x_in[x_in >= range[1] & x_in <= range[2]]
             y_vals <- unlist(lapply(x_vals, f_x))
-            n <- length(x_vals) + 2
-            h <- (b - a) / n 
-            
-            # evaluate integral
+            n <- length(x_vals)
+            h <- (range[2] - range[1]) / n
+
+            # evaluate integral with Trapezoidal rule 
             if (rule == "Trapezoid") {
-              result <- (h / 2) * (f_a + sum(2 * y_vals) + f_b)
+              result <- (h / 2) * (y_vals[1] + sum(2 * y_vals[2:(n-1)]) + y_vals[n])
               return(new("Trapezoid", 
-                         x = c(a, x_vals, b), 
-                         y = c(f_a, y_vals, f_b),
+                         x = x_vals, 
+                         y = y_vals,
                          integral = result))
             }
             
+            # evaluate integral with Simpson's rule
             if (rule == "Simpson") {
-              result <- (h / 3) * (f_a + sum(4 * y_vals[c(T, F)]) + sum(2 * y_vals[c(F,T)]) + f_b)
+              y_vals_mid <- y_vals[2:(n-1)]
+              result <- (h / 3) * (y_vals[1] + sum(4 * y_vals_mid[c(T, F)]) + sum(2 * y_vals_mid[c(F,T)]) + y_vals[n])
               return(new("Simpson", 
-                         x = c(a, x_vals, b), 
-                         y = c(f_a, y_vals, f_b),
+                         x = x_vals, 
+                         y = y_vals,
                          integral = result))
             }
           }
 )
-
-
 

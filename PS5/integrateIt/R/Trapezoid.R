@@ -14,6 +14,9 @@
 #' @aliases Trapezoid-initialize, integrateIt-method
 #' @rdname Trapezoid
 
+# ------------------------------------------------------
+# Function: validity check for Trapezoid objects
+# ------------------------------------------------------
 check_trapezoid <- function(object){
   # create errors log 
   errors <- character()
@@ -55,6 +58,9 @@ check_trapezoid <- function(object){
 }
 
 
+# ------------------------------------------------------
+# Class: Trapezoid
+# ------------------------------------------------------
 #' @export
 setClass(Class = "Trapezoid", 
          representation = representation(
@@ -71,6 +77,9 @@ setClass(Class = "Trapezoid",
 )
 
 
+# ------------------------------------------------------
+# Initializer
+# ------------------------------------------------------
 #' @export
 setMethod("initialize", 
           "Trapezoid", 
@@ -82,6 +91,9 @@ setMethod("initialize",
 ) 
 
 
+# ------------------------------------------------------
+# Method: print
+# ------------------------------------------------------
 #' @export
 setMethod("print", 
           (x = "Trapezoid"),

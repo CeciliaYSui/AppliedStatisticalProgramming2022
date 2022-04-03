@@ -15,7 +15,7 @@ Object of class \code{Simpson} are created by the \code{integrateIt} and \code{p
 An object of the class `Simpson' has the following slots:
 \itemize{
 \item \code{x} {a vector of values}
-\item \code{y} {a vector of evaluated values}
+\item \code{y} {a vector of evaluated values based on a function with input x}
 \item \code{integral} {the numerical approximation of the definite integral}
 }
 }

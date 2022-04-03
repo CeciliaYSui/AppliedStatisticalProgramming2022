@@ -6,7 +6,7 @@
 #' An object of the class `Simpson' has the following slots:
 #' \itemize{
 #' \item \code{x} {a vector of values}
-#' \item \code{y} {a vector of evaluated values}
+#' \item \code{y} {a vector of evaluated values based on a function with input x}
 #' \item \code{integral} {the numerical approximation of the definite integral}
 #' }
 #'
@@ -14,6 +14,9 @@
 #' @aliases Simpson-initialize, integrateIt-method
 #' @rdname Simpson
 
+# ------------------------------------------------------
+# Function: validity check for Simpson objects
+# ------------------------------------------------------
 check_simpson <- function(object){
   # create errors log 
   errors <- character()
@@ -49,12 +52,15 @@ check_simpson <- function(object){
     errors <- c(errors, "Integration is not valid.")
   }
   
+  # if there are errors, return errors 
   if (length(errors) == 0) TRUE else errors 
 }
 
 
 
-
+# ------------------------------------------------------
+# Class: Simpson
+# ------------------------------------------------------
 #' @export
 setClass(Class = "Simpson", 
          representation = representation(
@@ -72,6 +78,9 @@ setClass(Class = "Simpson",
 
 
 
+# ------------------------------------------------------
+# Initializer
+# ------------------------------------------------------
 #' @export
 setMethod("initialize", 
           "Simpson", 
