@@ -1,12 +1,14 @@
 Package: integrateIt
 Type: Package
-Title: What the Package Does in One 'Title Case' Line
+Title: Integration Package using Trapezoid and Simpson
 Version: 1.0
 Date: 2022-04-03
-Author: Your Name
-Maintainer: Your Name <your@email.com>
-Description: One paragraph description of what the package does as one or more
-        full sentences.
+Author: Cecilia Y. Sui
+Maintainer: Cecilia Y. Sui <c.sui@wustl.edu>
+Description: The package uses Trapezoidal rule and Simpson's rule to approximate definite integrals.
 License: GPL (>= 2)
-Imports: Rcpp (>= 1.0.7)
-LinkingTo: Rcpp
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Encoding: UTF-8
+Depends: R (>= 4.1.0), methods
+Imports: methods

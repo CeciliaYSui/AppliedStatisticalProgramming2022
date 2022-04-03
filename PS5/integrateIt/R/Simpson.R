@@ -5,66 +5,15 @@
 #' 
 #' An object of the class `Simpson' has the following slots:
 #' \itemize{
-#' \item \code{integral} the numerical approximation of the definite integral
-#' \item \code{x} a vector of values
-#' \item \code{y} a vector of evaluated values
+#' \item \code{x} {a vector of values}
+#' \item \code{y} {a vector of evaluated values}
+#' \item \code{integral} {the numerical approximation of the definite integral}
 #' }
 #'
 #' @author Cecilia Sui: \email{c.sui@@wustl.edu}
-#' 
-#' @aliases Simpson initialize, integrateIt-method
-#' 
+#' @aliases Simpson-initialize, integrateIt-method
 #' @rdname Simpson
-#' 
-#' @export
-setClass(Class = "Simpson", 
-         representation = representation(
-           integral = "numeric",
-           x = "numeric",
-           y = "numeric"
-         ),
-         prototype = prototype(
-           integral = c(),
-           x = c(),
-           y = c()
-         ),
-         validity = check_simpson
-)
 
-
-
-# ------------------------------------------------------
-# Initializer
-# ------------------------------------------------------
-#' @export
-setMethod("initialize", 
-          "Trapezoid", 
-          function(.Object, ...){
-            value = callNextMethod()
-            validObject(value)
-            return(value)
-          }
-) 
-
-
-
-
-# ------------------------------------------------------
-# Method: print
-# ------------------------------------------------------
-#' @export
-setMethod("print", 
-          (x = "Simpson"),
-          function(x){ 
-            print(x@integral)
-          }
-)
-
-
-
-# ------------------------------------------------------
-# validity check for Simpson objects 
-# ------------------------------------------------------
 check_simpson <- function(object){
   # create errors log 
   errors <- character()
@@ -94,7 +43,7 @@ check_simpson <- function(object){
   
   # compute integral using the Simpson Rule Formula given 
   result <- (h / 3) * (f_a + sum(4 * y_vals[c(T, F)]) + sum(2 * y_vals[c(F,T)]) + f_b)
-
+  
   # check integral 
   if (object@integral != result){
     errors <- c(errors, "Integration is not valid.")
@@ -102,6 +51,52 @@ check_simpson <- function(object){
   
   if (length(errors) == 0) TRUE else errors 
 }
+
+
+
+
+#' @export
+setClass(Class = "Simpson", 
+         representation = representation(
+           x = "numeric",
+           y = "numeric",
+           integral = "numeric"
+         ),
+         prototype = prototype(
+           x = c(),
+           y = c(),
+           integral = c()
+         ),
+         validity = check_simpson
+)
+
+
+
+#' @export
+setMethod("initialize", 
+          "Simpson", 
+          function(.Object, ...){
+            value = callNextMethod()
+            validObject(value)
+            return(value)
+          }
+) 
+
+
+
+
+# ------------------------------------------------------
+# Method: print
+# ------------------------------------------------------
+#' @export
+setMethod("print", 
+          (x = "Simpson"),
+          function(x){ 
+            print(x@integral)
+          }
+)
+
+
 
 
 

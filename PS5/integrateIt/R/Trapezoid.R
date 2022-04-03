@@ -5,66 +5,15 @@
 #' 
 #' An object of the class `Trapezoid' has the following slots:
 #' \itemize{
-#' \item \code{integral} the numerical approximation of the definite integral
-#' \item \code{x} a vector of values
-#' \item \code{y} a vector of evaluated values
+#' \item \code{x} {a vector of values}
+#' \item \code{y} {a vector of evaluated values}
+#' \item \code{integral} {the numerical approximation of the definite integral}
 #' }
-#'
+
 #' @author Cecilia Sui: \email{c.sui@@wustl.edu}
-#' 
-#' @aliases Trapezoid initialize, integrateIt-method
-#' 
+#' @aliases Trapezoid-initialize, integrateIt-method
 #' @rdname Trapezoid
-#' 
-#' @export
-setClass(Class = "Trapezoid", 
-         representation = representation(
-             integral = "numeric",
-             x = "numeric",
-             y = "numeric"
-         ),
-         prototype = prototype(
-             integral = c(),
-             x = c(),
-             y = c()
-         ),
-         validity = check_trapezoid
-)
 
-
-
-# ------------------------------------------------------
-# Initializer
-# ------------------------------------------------------
-#' @export
-setMethod("initialize", 
-          "Trapezoid", 
-          function(.Object, ...){
-            value = callNextMethod()
-            validObject(value)
-            return(value)
-          }
-) 
-
-
-
-
-# ------------------------------------------------------
-# Method: print
-# ------------------------------------------------------
-#' @export
-setMethod("print", 
-          (x = "Trapezoid"),
-          function(x){ 
-            print(x@integral)
-          }
-)
-
-
-
-# ------------------------------------------------------
-# validity check for Trapezoid objects 
-# ------------------------------------------------------
 check_trapezoid <- function(object){
   # create errors log 
   errors <- character()
@@ -97,14 +46,49 @@ check_trapezoid <- function(object){
   
   # check integral 
   if (object@integral != result){
+    print(object@integral)
+    print(result)
     errors <- c(errors, "Integration is not valid.")
   }
-
+  
   if (length(errors) == 0) TRUE else errors 
 }
 
 
+#' @export
+setClass(Class = "Trapezoid", 
+         representation = representation(
+             x = "numeric",
+             y = "numeric",
+             integral = "numeric"
+         ),
+         prototype = prototype(
+             x = c(),
+             y = c(),
+             integral = c()
+         ),
+         validity = check_trapezoid
+)
 
+
+#' @export
+setMethod("initialize", 
+          "Trapezoid", 
+          function(.Object, ...){
+            value = callNextMethod()
+            validObject(value)
+            return(value)
+          }
+) 
+
+
+#' @export
+setMethod("print", 
+          (x = "Trapezoid"),
+          function(x){ 
+            print(x@integral)
+          }
+)
 
 
 
