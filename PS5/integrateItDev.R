@@ -16,8 +16,8 @@ setwd("/Users/ysui/Documents/GitHub/AppliedStatisticalProgramming2022/PS5")
 # ------------------------------------------------------
 current.code <- as.package("integrateIt") 
 # Load all of the functions so you can use them
-load_all(current.code) 
-document(current.code) # Make the help files
+load_all(current.code, quiet = TRUE) 
+document(current.code, quiet = TRUE) # Make the help files
 
 
 # ------------------------------------------------------
