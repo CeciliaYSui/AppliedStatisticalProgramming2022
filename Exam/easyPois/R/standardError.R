@@ -1,6 +1,8 @@
 #' Calculating the standard error
 #'
+#'
 #' Calculates the standard error. 
+#' 
 #' 
 #'
 #' @param y The vector of observed data.
@@ -12,12 +14,13 @@
 #' 
 #' 
 #' @author Cecilia Y. Sui: \email{c.sui@@wustl.edu}
+#' @examples
+#' standardError(y, "basic", B = 500) 
+#' 
 #' @seealso \code{\link[PoisMLE]{logLik}}, \code{\link[PoisMLE]{mle}}, \code{\link[PoisMLE]{standardError}}, \code{\link[PoisMLE]{estimatePois}}
 #' @rdname standardError
 #' @include standardError.R
 #' @aliases standardError-method
-#' 
-#' @examples
 #' 
 
 
@@ -35,6 +38,7 @@ setGeneric(name = "standardError",
 # ------------------------------------------------------
 # Method: standardError
 # ------------------------------------------------------
+#' @export
 setMethod(f = "standardError",
           definition = function(y, SEtype, B){
             
@@ -58,14 +62,12 @@ setMethod(f = "standardError",
             
             # basic 
             if (SEtype == "basic"){
-              
               # evaluate standard error 
               return(sqrt(mle(y) / n))
             }
             
             # bootstrap
             if (SEtype == "bootstrap"){
-              
               # sample B times with replacement of sample size n from y  
               samples <- replicate(B, {(sample(y, n, replace = TRUE))})
               
@@ -74,7 +76,6 @@ setMethod(f = "standardError",
               
               # return standard deviation of the results above
               return(sd(mles))
-              
             }
           }
 )

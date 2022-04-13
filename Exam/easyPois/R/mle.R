@@ -11,14 +11,14 @@
 #' 
 #' 
 #' @author Cecilia Y. Sui: \email{c.sui@@wustl.edu}
+#' @examples
+#' mle(y)
+#' 
 #' @seealso \code{\link[PoisMLE]{logLik}}, \code{\link[PoisMLE]{mle}}, \code{\link[PoisMLE]{standardError}}, \code{\link[PoisMLE]{estimatePois}}
 #' @rdname mle
 #' @include mle.R
 #' @aliases mle-method
 #' 
-#' @examples
-#' 
-
 
 
 # ------------------------------------------------------
@@ -33,6 +33,7 @@ setGeneric(name = "mle",
 # ------------------------------------------------------
 # Method: mle
 # ------------------------------------------------------
+#' @export
 setMethod(f = "mle",
           definition = function(y){
             

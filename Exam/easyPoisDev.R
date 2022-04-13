@@ -15,10 +15,16 @@ setwd("/Users/ysui/Documents/GitHub/AppliedStatisticalProgramming2022/Exam")
 # ------------------------------------------------------
 current.code <- as.package("easyPois") 
 # Load all of the functions so you can use them
-load_all(current.code, quiet = TRUE) 
-document(current.code, quiet = TRUE) # Make the help files
+load_all(current.code) 
+document(current.code) # Make the help files
 
 
 # ------------------------------------------------------
 # Test functions 
 # ------------------------------------------------------
+
+
+
+
+
+

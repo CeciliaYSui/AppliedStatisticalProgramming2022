@@ -24,6 +24,7 @@
 #' @aliases estimatePois-method
 #' 
 #' @examples
+#' estimatePois(y, SEtype = "basic", B = 500, lambda = 2)
 #' 
 
 
@@ -42,7 +43,7 @@ setGeneric(name = "estimatePois",
 # Method: estimatePois
 # ------------------------------------------------------
 #' @export
-setMethod(f = "standardError",
+setMethod(f = "estimatePois",
           definition = function(y, SEtype, B, lambda){
             
             # return a PoisMLE object

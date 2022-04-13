@@ -12,12 +12,14 @@
 #' 
 #' 
 #' @author Cecilia Y. Sui: \email{c.sui@@wustl.edu}
+#' @examples
+#' logLik(y, lambda = 2)
+#' 
 #' @seealso \code{\link[PoisMLE]{logLik}}, \code{\link[PoisMLE]{mle}}, \code{\link[PoisMLE]{standardError}}, \code{\link[PoisMLE]{estimatePois}}
 #' @rdname logLik
 #' @include logLik.R
 #' @aliases logLik-method
 #' 
-#' @examples
 
 
 

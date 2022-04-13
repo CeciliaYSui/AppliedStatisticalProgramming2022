@@ -18,6 +18,10 @@ The function produces as an output: the log likelihood for the observed data con
 \description{
 Calculates a log likelihood for the observed data based on Poisson distribution.
 }
+\examples{
+logLik(y, lambda = 2)
+
+}
 \seealso{
 \code{\link[PoisMLE]{logLik}}, \code{\link[PoisMLE]{mle}}, \code{\link[PoisMLE]{standardError}}, \code{\link[PoisMLE]{estimatePois}}
 }

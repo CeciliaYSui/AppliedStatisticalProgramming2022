@@ -111,6 +111,7 @@ setMethod("initialize",
 # ------------------------------------------------------
 # Method: plot
 # ------------------------------------------------------
+#' @export
 setMethod("plot", 
           c(x = "PoisMLE", y = "missing"), 
           function(x, ...){
