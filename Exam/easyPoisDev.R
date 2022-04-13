@@ -23,12 +23,13 @@ document(current.code, quiet = TRUE)
 
 
 # ------------------------------------------------------
-# Testing some functions 
+# Simple tests of some functions 
 # ------------------------------------------------------
 set.seed(1023)
 y <- sample(1L:20L, 100, replace = TRUE)
 n <- length(y)
 lambda <- 2
+
 estimatePois(y, "basic", lambda = 2)
 estimatePois(y, "bootstrap", B = 1000, lambda = 2)
 logLik(y, lambda = 2)
