@@ -1,6 +1,6 @@
 Package: easyPois
 Type: Package
-Title: PoisMLE
+Title: easyPois Package 
 Version: 1.0
 Date: 2022-04-13
 Author: Cecilia Y. Sui
@@ -10,3 +10,9 @@ License: GPL (>= 2)
 Imports: Rcpp (>= 1.0.7)
 LinkingTo: Rcpp
 RoxygenNote: 7.1.2
+Collate: 
+    'PoisMLE.R'
+    'estimatePois.R'
+    'logLik.R'
+    'mle.R'
+    'standardError.R'

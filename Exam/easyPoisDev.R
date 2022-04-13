@@ -11,7 +11,7 @@ setwd("/Users/ysui/Documents/GitHub/AppliedStatisticalProgramming2022/Exam")
 
 
 # ------------------------------------------------------
-# load package 
+# load package easyPois
 # ------------------------------------------------------
 current.code <- as.package("easyPois") 
 # Load all of the functions so you can use them
