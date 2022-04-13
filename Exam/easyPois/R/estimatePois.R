@@ -34,7 +34,7 @@
 # ------------------------------------------------------
 #' @export
 setGeneric(name = "estimatePois",
-           def = function(y, SEtype, B, lambda)
+           def = function(y, SEtype, B = 1000, lambda = 1)
            {standardGeneric("estimatePois")}
 )
 
@@ -44,7 +44,7 @@ setGeneric(name = "estimatePois",
 # ------------------------------------------------------
 #' @export
 setMethod(f = "estimatePois",
-          definition = function(y, SEtype, B, lambda){
+          definition = function(y, SEtype, B = 1000, lambda = 1){
             
             # return a PoisMLE object
             return(new("PoisMLE",

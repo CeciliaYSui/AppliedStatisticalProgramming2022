@@ -19,6 +19,7 @@ The function produces as an output: the log likelihood for the observed data con
 Calculates a log likelihood for the observed data based on Poisson distribution.
 }
 \examples{
+y <- c(1L:10L)
 logLik(y, lambda = 2)
 
 }

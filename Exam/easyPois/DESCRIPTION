@@ -5,12 +5,13 @@ Version: 1.0
 Date: 2022-04-13
 Author: Cecilia Y. Sui
 Maintainer: Cecilia Y. Sui <c.sui@wustl.edu>
-Description: One paragraph description of what the package does as one or more full sentences.
+Description: The package calculates the maximum likelihood estimator with observed data that we assume to be distributed under Poisson distribution. 
 License: GPL (>= 2)
 RoxygenNote: 7.1.2
 Encoding: UTF-8
 Collate: 
     'PoisMLE.R'
+    'easyPois-package.R'
     'estimatePois.R'
     'logLik.R'
     'mle.R'

@@ -40,7 +40,7 @@ setGeneric(name = "standardError",
 # ------------------------------------------------------
 #' @export
 setMethod(f = "standardError",
-          definition = function(y, SEtype, B){
+          definition = function(y, SEtype, B = 1000){
             
             # check for SEtype input
             if (! SEtype %in% c("basic", "bootstrap")){

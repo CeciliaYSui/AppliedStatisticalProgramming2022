@@ -17,6 +17,7 @@ The function outputs the maximum likelihood estimator for \eqn{\lambda}.
 Calculates the maximum likelihood estimator for lambda.
 }
 \examples{
+y <- 1L:20L
 mle(y)
 
 }

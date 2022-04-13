@@ -109,11 +109,12 @@ setMethod("initialize",
 
 
 # ------------------------------------------------------
-# Method: plot
+# Method: plot with ggplot2 
 # ------------------------------------------------------
 #' @export
+#' @import ggplot2 
 setMethod("plot", 
-          c(x = "PoisMLE", y = "missing"), 
+          c(x = "PoisMLE"), 
           function(x, ...){
             upper <- x@MLE + 1.96 * x@SE
             lower <- x@MLE - 1.96 * x@SE

@@ -5,7 +5,7 @@
 \alias{estimatePois-method}
 \title{Estimating Poisson Distribution}
 \usage{
-estimatePois(y, SEtype, B, lambda)
+estimatePois(y, SEtype, B = 1000, lambda = 1)
 }
 \arguments{
 \item{y}{The vector of observed data.}

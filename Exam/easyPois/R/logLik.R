@@ -13,6 +13,7 @@
 #' 
 #' @author Cecilia Y. Sui: \email{c.sui@@wustl.edu}
 #' @examples
+#' y <- c(1L:10L)
 #' logLik(y, lambda = 2)
 #' 
 #' @seealso \code{\link[PoisMLE]{logLik}}, \code{\link[PoisMLE]{mle}}, \code{\link[PoisMLE]{standardError}}, \code{\link[PoisMLE]{estimatePois}}

@@ -12,6 +12,7 @@
 #' 
 #' @author Cecilia Y. Sui: \email{c.sui@@wustl.edu}
 #' @examples
+#' y <- 1L:20L
 #' mle(y)
 #' 
 #' @seealso \code{\link[PoisMLE]{logLik}}, \code{\link[PoisMLE]{mle}}, \code{\link[PoisMLE]{standardError}}, \code{\link[PoisMLE]{estimatePois}}
