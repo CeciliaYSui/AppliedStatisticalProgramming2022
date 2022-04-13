@@ -1,0 +1,24 @@
+# ------------------------------------------------------
+# Load libraries and set working directory
+# ------------------------------------------------------
+library(devtools)
+library(roxygen2)
+
+# ------------------------------------------------------
+# Set working directory
+# ------------------------------------------------------
+setwd("/Users/ysui/Documents/GitHub/AppliedStatisticalProgramming2022/Exam")
+
+
+# ------------------------------------------------------
+# load package 
+# ------------------------------------------------------
+current.code <- as.package("easyPois") 
+# Load all of the functions so you can use them
+load_all(current.code, quiet = TRUE) 
+document(current.code, quiet = TRUE) # Make the help files
+
+
+# ------------------------------------------------------
+# Test functions 
+# ------------------------------------------------------
