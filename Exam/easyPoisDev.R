@@ -14,20 +14,25 @@ library(roxygen2)
 # load package easyPois
 # ------------------------------------------------------
 current.code <- as.package("easyPois") 
-# Load all of the functions so you can use them
-load_all(current.code, quiet = TRUE) # please don't tell me all the warnings 
-document(current.code, quiet = TRUE) # Make the help files
+
+# Load all of the functions
+load_all(current.code, quiet = TRUE) # please don't tell me all the warnings :)
+
+# Make the help files
+document(current.code, quiet = TRUE) 
 
 
 # ------------------------------------------------------
-# Test functions 
+# Testing some functions 
 # ------------------------------------------------------
-y <- 1L:20L
+set.seed(1023)
+y <- sample(1L:20L, 100, replace = TRUE)
+n <- length(y)
+lambda <- 2
 estimatePois(y, "basic", lambda = 2)
 estimatePois(y, "bootstrap", B = 1000, lambda = 2)
-
-
-
-
+logLik(y, lambda = 2)
+mle(y)
+standardError(y, "bootstrap", B = 1000)
 
 

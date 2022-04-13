@@ -21,7 +21,6 @@
 #' @include PoisMLE.R
 #' @aliases PoisMLE-class
 #' 
-#' 
 
 
 # ------------------------------------------------------
@@ -46,25 +45,26 @@ check_PoisMLE <- function(object){
     errors <- c(errors, "Vector y must only contain positive integers or zero.")
   }
   
-  # check MLE 
+  # check MLE data type
   if (!is.numeric(object@MLE)){
     errors <- c(errors, "The MLE (maximum likelihood estimator) must be of numeric type.")
   }
   
-  # check LL
+  # check LL data type
   if (!is.numeric(object@LL)){
     errors <- c(errors, "The LL (log likelihood) must be of numeric type.")
   }
   
-  # check SE 
+  # check SE data type
   if (!is.numeric(object@SE)){
     errors <- c(errors, "The LL (log likelihood) must be of numeric type.")
   }
   
-  # check SEtype
+  # check SEtype data type
   if (!is.character(object@SEtype)){
     errors <- c(errors, "The SEtype (log likelihood) must be a character string.")
   }
+  
   
   # if there are errors, return errors 
   if (length(errors) == 0) TRUE else errors
@@ -107,20 +107,3 @@ setMethod("initialize",
           }
 ) 
 
-
-# ------------------------------------------------------
-# Method: plot with ggplot2 
-# ------------------------------------------------------
-#' @export
-#' @import ggplot2 
-setMethod("plot", 
-          c(x = "PoisMLE"), 
-          function(x, ...){
-            upper <- x@MLE + 1.96 * x@SE
-            lower <- x@MLE - 1.96 * x@SE
-            plot(x@MLE, 
-                 xlab = "", 
-                 ylab = "MLE", 
-                 main = "MLE")
-          }
-) 

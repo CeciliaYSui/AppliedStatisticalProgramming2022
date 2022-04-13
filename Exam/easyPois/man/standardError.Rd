@@ -12,15 +12,16 @@ standardError(y, SEtype, B)
 
 \item{SEtype}{The method used to calculate the standard error. It can take on two values: basic and bootstrap.}
 
-\item{B}{The number of bootstrapped resamplings.}
+\item{B}{The number of bootstrapped re-samplings.}
 }
 \value{
 The function outputs the standard error calculated via the chosen method.
 }
 \description{
-Calculates the standard error.
+Calculates the standard error based on a chosen method by the user.
 }
 \examples{
+y <- sample(1L:20L, 100, replace = TRUE)
 standardError(y, "basic", B = 500) 
 
 }

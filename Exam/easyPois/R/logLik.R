@@ -7,7 +7,7 @@
 #' @param lambda The assumed value of \eqn{\lambda}.
 #'
 #'
-#' @return The function produces as an output: the log likelihood for the observed data conditioned on the value of \eqn{\lambda}.
+#' @return The function outputs the log likelihood for the observed data conditioned on the value of \eqn{\lambda}.
 #' 
 #' 
 #' 
@@ -41,16 +41,17 @@ setGeneric(name = "logLik",
 setMethod(f = "logLik",
           definition = function(y, lambda){
             
+            # -----------------------------
             # check for valid lambda input 
+            # -----------------------------
             if (lambda <= 0) {
-              stop("Lambda must be in the range of zero (exclusive) to infinity.")
+              stop("Value Error: Lambda must be in the range of zero (exclusive) to infinity.")
             }
-            
-            # extract n: the number of observations 
-            n <- length(y)
-            
-            # evaluate log likelihood 
-            LL <- -n * lambda - sum(log(factorial(y))) + log(lambda) * sum(y)
+
+            # -----------------------------
+            # evaluate log likelihood based on given formula 
+            # -----------------------------
+            LL <- - length(y) * lambda - sum(log(factorial(y))) + log(lambda) * sum(y)
 
             return(LL)
           }

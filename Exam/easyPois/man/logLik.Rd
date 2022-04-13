@@ -13,7 +13,7 @@ logLik(y, lambda)
 \item{lambda}{The assumed value of \eqn{\lambda}.}
 }
 \value{
-The function produces as an output: the log likelihood for the observed data conditioned on the value of \eqn{\lambda}.
+The function outputs the log likelihood for the observed data conditioned on the value of \eqn{\lambda}.
 }
 \description{
 Calculates a log likelihood for the observed data based on Poisson distribution.

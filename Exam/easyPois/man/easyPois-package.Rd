@@ -12,6 +12,8 @@ The package calculates the maximum likelihood estimator with observed data that 
 y <- 1L:20L
 estimatePois(y, "bootstrap", B = 1000, lambda = 2)
 
+
+
 }
 \author{
 Cecilia Y. Sui: \email{c.sui@wustl.edu}
