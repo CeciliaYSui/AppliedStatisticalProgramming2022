@@ -1,0 +1,147 @@
+---
+title: "Applied Statistical Programming - The EM Algorithm"
+date: "4/13/2022"
+header-includes:
+   - \usepackage{amsmath}
+   - \usepackage{geometry}
+   - \usepackage{hyperref}
+   - \usepackage{setspace}
+   - \usepackage{hyperref}
+output: pdf_document
+author: Evan Jo, Annie Jarman, Jordon Newton, Cecilia Sui
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(profvis)
+```
+
+\textbf{Write R and Rcpp code to answer the following questions. Write the code, and then show what the computer returns when that code is run. Thoroughly comment your solutions.}
+
+Complete this assignment before 10:00am on Wednesday, April 20. Submit the R implementation as an Rmarkdown and the knitted PDF to Canvas. Have one group member submit the activity with all group members listed at the top. The Rcpp portion will be given to you as your final assignment.
+
+
+\section*{In-class Background: The Expectation-Maximization Algorithm}
+
+The goal of this in-class exercise is to implement an ensemble of models. You will combine forecasts of US presidential elections using ensemble Bayesian model averaging (EBMA). To do this, you must decide how to weight each component of the forecast in the prediction. The collection of these weighted forecasts form the ensemble, and you will use something called the EM (expectation-maximization) algorithm.
+
+The task is to choose values $w_k$ that maximize the following equation:
+
+\begin{equation}
+   p(y \vert f_1^{s \vert t^{\star}}, ..., f_K^{s \vert t^{\star}}) = \sum\limits^N_{k=1} w_k N(f_k^{t^{\star}}, \sigma^{2})
+\end{equation}
+
+For the remainder of this assignment, assume that the parameter $\sigma^{2}$ is known and that $\sigma^{2} = 1$. 
+
+The first step of the EM algorithm is to estimate the latent quantity $\hat{z}^t_k$ that represents the probability that observation $t$ was best predicted by model $k$.
+
+\begin{equation}
+   \hat{z}_k^{(j+1)t} = \frac{\hat{w}_k^{(j)} N(y^t \vert f_k^t, 1)}{\sum\limits^N_{k=1} \hat{w}_k^{(j)} N(y^t \vert f_k^t, 1)}
+\end{equation}
+
+In this equation, $j$ is the particular iteration of the EM algorithm, and $N(y^t \vert f_k^t, 1)$ is the normal cumulative distribution function evaluated at the observed election outcome (\texttt{dnorm(y, ftk, 1)}).
+
+The second step of the EM algorithm is to estimate the expected value of the weights assuming that all $\hat{z}^{t}_{k}$ are correct.
+
+\begin{equation}
+   \hat{w}^{(j+1)}_k = \frac{1}{n} \sum_t \hat{z}_k^{(j+1)t}
+\end{equation}
+
+\newpage
+
+The estimation procedure is as follows:
+\begin{enumerate}
+   \item Start with the assumption that all models are weighted equally.
+   \item Calculate $\hat{z}_k^{(j+1)t}$ for each model for each election.
+   \item Calculate $\hat{w}_k^{(j+1)}$ for each model.
+   \item Repeat steps 2-3 twenty times.
+\end{enumerate}
+
+Complete the preceding tasks in \texttt{R} alone.
+
+
+```{r}
+em_alg <- function(y, ftk) {
+  
+  # assume equal weights 
+  n <- length(y) 
+  m <- length(ftk)
+  weights <- rep(1 / m, m)
+  
+  for (k in 1:20) {
+    z_hat <- matrix(nrow = n, ncol = m) 
+    
+    for (i in 1:n) {
+      # store all values 
+      num_vec <- rep(0,m)
+      
+      for (j in 1:m) {
+        num_vec[j] <- dnorm(y[i],ftk[j],1) * weights[j]
+      }
+      
+      # update z_hat vector 
+      z_hat[i,] <- num_vec / sum(num_vec)
+    }
+
+    weights <- colMeans(z_hat)
+  }
+  return(weights)
+} 
+
+em_alg(y = c(0.2,0.5), ftk = seq(0,1,0.1))
+```
+
+
+## profiling function 
+
+
+```{r}
+# not very useful haha
+profvis({
+  em_alg(y = c(0.2,0.5), ftk = seq(0,1,0.001))
+})
+```
+
+
+## profiling 
+
+```{r message = F}
+profvis({
+  y = c(0.2,0.5)
+  ftk = seq(0,1,0.001)
+  
+  # assume equal weights 
+  n <- length(y) 
+  m <- length(ftk)
+  weights <- rep(1 / m, m)
+  
+  for (k in 1:20) {
+    z_hat <- matrix(nrow = n, ncol = m) 
+    
+    for (i in 1:n) {
+      # store all values 
+      num_vec <- rep(0,m)
+      
+      for (j in 1:m) {
+        num_vec[j] <- dnorm(y[i],ftk[j],1) * weights[j]
+      }
+      
+      # update z_hat vector 
+      z_hat[i,] <- num_vec / sum(num_vec)
+    }
+
+    weights <- colMeans(z_hat)
+  }
+})
+```
+
+
+
+\section*{Assignment: Rcpp Practice}
+
+
+\begin{enumerate}
+   \item Write an Rcpp function that will calculate the answer to Equation (2). The output will be a matrix.
+   \item Write an Rcpp function that will calculate the answer to Equation (3). The output will be a vector.
+   \item Write an Rcpp function that will complete the entire algorithm.
+\end{enumerate}
